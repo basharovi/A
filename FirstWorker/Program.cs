@@ -8,14 +8,16 @@ namespace FirstWorker
 {
     public class Program
     {
+        public static IConfiguration _configuration;
+
         public static void Main(string[] args)
         {
-            var configuration = new ConfigurationBuilder()
+            _configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
 
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
+                .ReadFrom.Configuration(_configuration)
                 .CreateLogger();
 
             try
