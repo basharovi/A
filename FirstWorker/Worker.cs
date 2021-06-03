@@ -1,9 +1,11 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 
 namespace FirstWorker
 {
@@ -20,10 +22,8 @@ namespace FirstWorker
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                //_logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-
                 var jsonResult = JsonConvert.SerializeObject(CreateSamplePayload());
-                _logger.LogInformation("\n==============\n Information \n==============\n {0} \n==============\n", jsonResult);
+                _logger.LogInformation($"\n {jsonResult} \n");
 
                 var delayDuration = Convert.ToInt32(Program._configuration.GetSection("DelayDuration").Value);
                 await Task.Delay(1000 * delayDuration, stoppingToken);
