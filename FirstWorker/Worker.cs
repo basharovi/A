@@ -23,7 +23,7 @@ namespace FirstWorker
                 var jsonResult = JsonConvert.SerializeObject(CreateSamplePayload());
                 _logger.LogInformation($"\n {jsonResult} \n");
 
-                var delayDuration = Convert.ToInt32(Program._configuration.GetSection("DelayDuration").Value);
+                var delayDuration = Convert.ToInt32(Program.Configuration.GetSection("DelayDuration").Value);
                 await Task.Delay(1000 * delayDuration, stoppingToken);
             }
         }
@@ -36,7 +36,7 @@ namespace FirstWorker
                 {
                     timeStamp = DateTime.Now.ToString("dddd, dd MMMM yyyy, HH:mm:ss tt"),
 
-                    deviceId = new Random().Next(1, 3),
+                    deviceId = new Random().Next(1, 10),
 
                     power = new
                     {
