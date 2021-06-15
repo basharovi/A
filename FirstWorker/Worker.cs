@@ -1,11 +1,9 @@
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System.Text.Json;
 using System;
+using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace FirstWorker
 {
@@ -29,16 +27,16 @@ namespace FirstWorker
                 await Task.Delay(1000 * delayDuration, stoppingToken);
             }
         }
-
+         
         private static object[] CreateSamplePayload()
         {
             var payloads = new object[]
             {
                 new
                 {
-                    timeStamp = DateTime.Now.ToShortDateString(),
+                    timeStamp = DateTime.Now.ToString("dddd, dd MMMM yyyy, HH:mm:ss tt"),
 
-                    deviceId = new Random().Next(1, 10),
+                    deviceId = new Random().Next(1, 3),
 
                     power = new
                     {

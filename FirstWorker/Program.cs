@@ -4,8 +4,8 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
 
-namespace FirstWorker
-{
+namespace FirstWorker { 
+
     public class Program
     {
         public static IConfiguration _configuration;
