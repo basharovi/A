@@ -3,25 +3,19 @@ using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace FirstWorker
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
-
-        public Worker(ILogger<Worker> logger)
-        {
-            _logger = logger;
-        }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
                 var jsonResult = JsonConvert.SerializeObject(CreateSamplePayload());
-                _logger.LogInformation($"\n {jsonResult} \n");
+                Log.Information($"\n {jsonResult} \n");
 
                 var delayDuration = Convert.ToInt32(Program.Configuration.GetSection("DelayDuration").Value);
                 await Task.Delay(1000 * delayDuration, stoppingToken);
